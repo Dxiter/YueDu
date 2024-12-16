@@ -1,0 +1,27 @@
+
+.category.data-v-8145b772 {
+  display: flex;
+  height: 100vh;
+}
+.category-list.data-v-8145b772 {
+  width: 200rpx;
+  background-color: #f8f8f8;
+  border-right: 1rpx solid #ddd;
+}
+.category-item.data-v-8145b772 {
+  padding: 20rpx;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.category-item.active.data-v-8145b772 {
+  background-color: #e0f7fa;
+  font-weight: bold;
+}
+.product-list.data-v-8145b772 {
+  flex: 1;
+  padding: 20rpx;
+}
+.product-card.data-v-8145b772 {
+  margin-bottom: 20rpx;
+}

@@ -1,0 +1,66 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "custom"
+      }
+    },
+	{"path": "pages/order/pay"},{"path": "pages/order/address"},{"path": "pages/order/createOrder"},{"path": "pages/order/paySuccess"},
+    {
+      "path": "pages/category/category",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/cart/cart",
+      "style": {
+        "navigationBarTitleText": "购物车"
+      }
+    },
+    {
+      "path": "pages/user/user",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/product/product",
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
+    }
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icon_pic/shouye.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "static/icon_pic/femlei.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "static/icon_pic/gouwuche.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "static/icon_pic/wode.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      }
+
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/user/user",
+    "pages/product/product"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/icon_pic/shouye.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "static/icon_pic/femlei.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "static/icon_pic/gouwuche.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "static/icon_pic/wode.png",
+        "selectedIconPath": "static/icon_pic/xuanzhong.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
