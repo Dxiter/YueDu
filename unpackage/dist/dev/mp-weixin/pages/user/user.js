@@ -1,51 +1,55 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
-const wideValue = 20;
 const _sfc_main = {
-  data() {
-    return {
-      login: true,
-      topPadding: 0,
-      moveDistance: 0,
-      // 当前产生的距离
-      moveY: 0,
-      // 拖拽时候的Y点
-      startY: 0,
-      // 初始位置的Y点
-      wideValue,
-      translateY: -1 * wideValue
-      // 自身Y点
+  __name: "user",
+  setup(__props) {
+    const store = common_vendor.useStore();
+    const isLogin = common_vendor.computed(() => store.getters.getLoginStatus);
+    const nickname = common_vendor.ref("");
+    const checkLoginStatus = () => {
+      if (!isLogin.value) {
+        common_vendor.index.navigateTo({ url: "/pages/user/login" });
+      } else {
+        fetchUserProfile();
+      }
     };
-  },
-  onReady() {
-    const SystemInfo = common_vendor.index.getWindowInfo();
-    let statusBarHeight = SystemInfo.statusBarHeight;
-    let titleBarHeight = common_vendor.index.getMenuButtonBoundingClientRect().height;
-    this.topPadding = statusBarHeight + titleBarHeight;
+    const fetchUserProfile = () => {
+      common_vendor.index.request({
+        url: "http://localhost:8080/api/user/profile",
+        method: "GET",
+        header: {
+          "Authorization": "Bearer " + store.state.token
+        },
+        success: (res) => {
+          console.log("后端返回的数据:", res.data);
+          if (res.data && res.data.nickname) {
+            nickname.value = res.data.nickname;
+          } else {
+            errorMessage.value = "获取用户信息失败，请重试";
+          }
+        },
+        fail: () => {
+          errorMessage.value = "网络请求失败，请重试";
+        }
+      });
+    };
+    common_vendor.onMounted(() => {
+      checkLoginStatus();
+    });
+    return (_ctx, _cache) => {
+      return {
+        a: common_assets._imports_0,
+        b: common_assets._imports_1,
+        c: common_assets._imports_2,
+        d: common_assets._imports_3,
+        e: common_assets._imports_4,
+        f: common_assets._imports_5,
+        g: common_assets._imports_6,
+        h: common_assets._imports_7
+      };
+    };
   }
 };
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
-    a: $data.login ? "/static/user_pic/p1.jpg" : "/static/user_pic/default.png",
-    b: $data.login
-  }, $data.login ? {} : {}, {
-    c: $data.login
-  }, $data.login ? {} : {}, {
-    d: $data.topPadding + "px",
-    e: $data.wideValue + "px",
-    f: common_assets._imports_0,
-    g: common_assets._imports_1,
-    h: common_assets._imports_2,
-    i: common_assets._imports_1,
-    j: common_assets._imports_3,
-    k: common_assets._imports_4,
-    l: common_assets._imports_5,
-    m: common_assets._imports_6,
-    n: common_assets._imports_7,
-    o: common_assets._imports_8,
-    p: "translateY(" + $data.translateY + "px)"
-  });
-}
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0f7520f0"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-0f7520f0"]]);
 wx.createPage(MiniProgramPage);

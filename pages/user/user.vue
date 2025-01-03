@@ -1,41 +1,28 @@
 <template>
   <view class="my-page">
     <!-- 头部区域 -->
-    <view class="header" :style="{'padding-top': topPadding+'px','padding-bottom':wideValue+'px'}">
+    <view class="header">
       <!-- 个人信息部分 -->
       <view class="user-info">
         <!-- 左侧头像及信息 -->
         <view class="user-info-left-03box">
-          <image fit="cover" :src="login ? '/static/user_pic/image.png' : '/static/user_pic/default.png'" class="user-info-avatar"></image>
-          <view class="user-name" v-if="login">User</view>
+          <image fit="cover" src="../../static/user_pic/image.png" class="user-info-avatar"></image>
+          <view class="user-name">{{nickname}}</view>
         </view>
-        <view class="user-info-right-box" v-if="login">
-          <text class="points-text">积分: 1000</text>
+        <view class="user-info-right-box">
+          <text class="points-text">签到</text>
         </view>
       </view>
     </view>
-    <!-- 数据订单部分 -->
-    <view class="order-container">
-      <view class="order-header">
-        <text class="my-order">我的订单</text>
-        <text class="all-orders">全部订单></text>
-      </view>
+    <view class="account-data">
       <view class="detail-order">
         <view>
-          <image src="../../static/icon_pic/daifukuan.png" style="width: 25px;height: 25px;"></image>
-          <text>待付款</text>
+          <image src="../../static/icon_pic/yue.png" style="width: 30px;height: 30px;padding-top: 35rpx;"></image>
+          <text>书币余额</text>
         </view>
         <view>
-          <image src="../../static/icon_pic/daishouhuo.png" style="width: 25px;height: 25px;"></image>
-          <text>待收货</text>
-        </view>
-        <view>
-          <image src="../../static/icon_pic/daipingjia.png" style="width: 20px;height: 20px;"></image>
-          <text style="margin-bottom: -3.5px;">待评价</text>
-        </view>
-        <view>
-          <image src="../../static/icon_pic/daishouhuo.png" style="width: 25px;height: 25px;"></image>
-          <text>待退修</text>
+          <image src="../../static/icon_pic/jifen.png" style="width: 40px;height: 40px;padding-top: 20rpx;"></image>
+          <text>阅读积分</text>
         </view>
       </view>
     </view>
@@ -43,29 +30,26 @@
     <view class="drag-content">
       <scroll-view scroll-y="true" class="scroll-container">
         <view class="scroll-container-content">
-          <view class="my-functions" :style="{transform: 'translateY('+translateY+'px)'}">
+          <view class="my-functions">
             <view>
-              <image src="../../static/icon_pic/xiaomihuiyuan.png" style="width: 15px;height: 15px;"></image>
-              <text>小米会员</text>
+              <image src="../../static/icon_pic/huizhang.png" style="width: 25px;height: 25px;"></image>
+              <text>徽章</text>
             </view>
             <view>
-              <image src="../../static/icon_pic/huiyuanzhongxin.png" style="width: 15px;height: 15px;"></image>
-              <text>会员中心</text>
+              <image src="../../static/icon_pic/xiaoxi.png" style="width: 25px;height: 25px;"></image>
+              <text>消息</text>
             </view>
             <view>
-              <image src="../../static/icon_pic/fuwuzhongxin.png" style="width: 15px;height: 15px;"></image>
-              <text>服务中心</text>
+              <image src="../../static/icon_pic/zhuangban.png" style="width: 25px;height: 25px;"></image>
+              <text>装扮</text>
             </view>
             <view>
-              <image src="../../static/icon_pic/xiaomizhijia.png" style="width: 15px;height: 15px;"></image>
-              <text>小米之家</text>
+              <image src="../../static/icon_pic/cunzhu.png" style="width: 25px;height: 25px;"></image>
+              <text>存储</text>
             </view>
+
             <view>
-              <image src="../../static/icon_pic/gengduogongnneg.png" style="width: 15px;height: 15px;"></image>
-              <text>更多功能</text>
-            </view>
-            <view>
-              <image src="../../static/icon_pic/shezhi.png" style="width: 15px;height: 15px;"></image>
+              <image src="../../static/icon_pic/shezhi.png" style="width: 25px;height: 25px;"></image>
               <text>设置</text>
             </view>
           </view>
@@ -75,31 +59,43 @@
   </view>
 </template>
 
-<script>
-  const wideValue = 20;
-  export default {
-    data() {
-      return {
-        login: true,
-        topPadding: 0,
-        moveDistance: 0, // 当前产生的距离
-        moveY: 0, // 拖拽时候的Y点
-        startY: 0, // 初始位置的Y点
-        wideValue: wideValue,
-        translateY: -1 * wideValue, // 自身Y点
-      };
+<script setup>
+import { onMounted, computed, ref } from 'vue'
+import { useStore } from 'vuex';
+const store = useStore();
+const isLogin = computed(() => store.getters.getLoginStatus);
+const nickname = ref('');
+const checkLoginStatus = () => {
+  if (!isLogin.value) {
+    uni.navigateTo({ url: '/pages/user/login' });
+  } else {
+    fetchUserProfile();
+  }
+};
+
+const fetchUserProfile = () => {
+  uni.request({
+    url: 'http://localhost:8080/api/user/profile',
+    method: 'GET',
+    header: {
+      'Authorization': 'Bearer ' + store.state.token
     },
-    onReady() {
-      // 获取系统信息
-      const SystemInfo = uni.getWindowInfo();
-      // 获取状态栏高度
-      let statusBarHeight = SystemInfo.statusBarHeight;
-      // 获取胶囊体高度
-      let titleBarHeight = uni.getMenuButtonBoundingClientRect().height;
-      // 计算两者总和高度
-      this.topPadding = statusBarHeight + titleBarHeight;
+    success: (res) => {
+      console.log('后端返回的数据:', res.data);
+      if (res.data && res.data.nickname) {
+        nickname.value = res.data.nickname;
+      } else {
+        errorMessage.value = '获取用户信息失败，请重试';
+      }
     },
-   }
+    fail: () => {
+      errorMessage.value = '网络请求失败，请重试';
+    }
+  });
+};
+onMounted(() => {
+  checkLoginStatus();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -118,7 +114,7 @@
   }
 
   .user-info {
-    height: 225rpx;
+    height: 300rpx;
     padding: 0 32rpx;
     box-sizing: border-box;
     display: flex;
@@ -132,16 +128,16 @@
   }
 
   .user-info-avatar {
-    margin-top: 75rpx;
-    margin-top: 80rpx;
-    margin-right: 32rpx;
-    width: 120rpx;
-    height: 120rpx;
+    margin-top: 40rpx;
+    margin-left: 20rpx;
+    width: 135rpx;
+    height: 135rpx;
     border-radius: 50%;
   }
 
   .user-name {
     margin-top: 75rpx;
+    margin-left: 30rpx;
     color: white;
     white-space: nowrap;
     font-size: 36rpx;
@@ -165,7 +161,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 180rpx;
+    width: 100rpx;
     background-color: goldenrod;
     border-radius: 30rpx;
 
@@ -175,7 +171,7 @@
     }
   }
 
-  .order-container {
+  .account-data {
     width: 100%;
     box-sizing: border-box;
   }
@@ -185,7 +181,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10rpx 50rpx;
-    margin-bottom: 10rpx; /* 减少底部间距 */
+    margin-bottom: 10rpx;
+    /* 减少底部间距 */
   }
 
   .my-order {
@@ -207,7 +204,7 @@
     box-sizing: border-box;
   }
 
-  .detail-order > view {
+  .detail-order>view {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -216,18 +213,18 @@
     border-radius: 8rpx;
   }
 
-  .detail-order > view image {
+  .detail-order>view image {
     margin-bottom: 8rpx;
   }
 
-  .detail-order > view text:nth-child(1) {
+  .detail-order>view text:nth-child(1) {
     font-size: 32rpx;
     line-height: 34rpx;
     font-weight: bold;
     color: black;
   }
 
-  .detail-order > view text:nth-child(2) {
+  .detail-order>view text:nth-child(2) {
     font-size: 24rpx;
     line-height: 28rpx;
     color: black;
@@ -240,8 +237,9 @@
 
     .scroll-container {
       height: calc(100vh - 494rpx);
+
       .scroll-container-content {
-        padding-top: 64rpx;
+        padding-top: 10rpx;
         padding-bottom: 64rpx;
       }
     }
@@ -251,13 +249,13 @@
   .my-functions {
     width: 100%;
     background: #ffffff;
-    padding: 0rpx 32rpx;
+    padding: 0rpx 30rpx;
     box-sizing: border-box;
 
-    .icon {
-      width: 48rpx;
-      height: 48rpx;
-    }
+    // .icon {
+    //   width: 48rpx;
+    //   height: 48rpx;
+    // }
 
     view {
       display: flex;

@@ -7,17 +7,16 @@
         "navigationStyle": "custom"
       }
     },
-	{"path": "pages/order/pay"},{"path": "pages/order/address"},{"path": "pages/order/createOrder"},{"path": "pages/order/paySuccess"},
     {
-      "path": "pages/category/category",
+      "path": "pages/bookshelf/bookshelf",
       "style": {
         "navigationBarTitleText": ""
       }
     },
     {
-      "path": "pages/cart/cart",
+      "path": "pages/voicebook/voicebook",
       "style": {
-        "navigationBarTitleText": "购物车"
+        "navigationBarTitleText": ""
       }
     },
     {
@@ -28,10 +27,25 @@
       }
     },
     {
-      "path": "pages/product/product",
-      "style": {
-        "navigationBarTitleText": "商品详情"
-      }
+    	"path" : "pages/user/login",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : ""
+    	}
+    },
+    {
+    	"path" : "pages/user/register",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : ""
+    	}
+    },
+    {
+    	"path" : "pages/bookdetail/bookdetail",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : ""
+    	}
     }
   ],
   "tabBar": {
@@ -39,19 +53,19 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/icon_pic/shouye.png",
+        "iconPath": "static/icon_pic/yuedu.png",
         "selectedIconPath": "static/icon_pic/xuanzhong.png"
       },
       {
-        "pagePath": "pages/category/category",
-        "text": "分类",
-        "iconPath": "static/icon_pic/femlei.png",
+        "pagePath": "pages/bookshelf/bookshelf",
+        "text": "书架",
+        "iconPath": "static/icon_pic/shujia.png",
         "selectedIconPath": "static/icon_pic/xuanzhong.png"
       },
       {
-        "pagePath": "pages/cart/cart",
-        "text": "购物车",
-        "iconPath": "static/icon_pic/gouwuche.png",
+        "pagePath": "pages/voicebook/voicebook",
+        "text": "有声书",
+        "iconPath": "static/icon_pic/youshengshu.png",
         "selectedIconPath": "static/icon_pic/xuanzhong.png"
       },
       {

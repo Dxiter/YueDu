@@ -2946,9 +2946,6 @@ function isReadonly(value) {
 function isShallow(value) {
   return !!(value && value["__v_isShallow"]);
 }
-function isProxy(value) {
-  return isReactive(value) || isReadonly(value);
-}
 function toRaw(observed) {
   const raw = observed && observed["__v_raw"];
   return raw ? toRaw(raw) : observed;
@@ -4219,21 +4216,21 @@ function injectHook(type, hook, target = currentInstance, prepend = false) {
     );
   }
 }
-const createHook = (lifecycle) => (hook, target = currentInstance) => (
+const createHook$1 = (lifecycle) => (hook, target = currentInstance) => (
   // post-create lifecycle registrations are noops during SSR (except for serverPrefetch)
   (!isInSSRComponentSetup || lifecycle === "sp") && injectHook(lifecycle, (...args) => hook(...args), target)
 );
-const onBeforeMount = createHook("bm");
-const onMounted = createHook("m");
-const onBeforeUpdate = createHook("bu");
-const onUpdated = createHook("u");
-const onBeforeUnmount = createHook("bum");
-const onUnmounted = createHook("um");
-const onServerPrefetch = createHook("sp");
-const onRenderTriggered = createHook(
+const onBeforeMount = createHook$1("bm");
+const onMounted = createHook$1("m");
+const onBeforeUpdate = createHook$1("bu");
+const onUpdated = createHook$1("u");
+const onBeforeUnmount = createHook$1("bum");
+const onUnmounted = createHook$1("um");
+const onServerPrefetch = createHook$1("sp");
+const onRenderTriggered = createHook$1(
   "rtg"
 );
-const onRenderTracked = createHook(
+const onRenderTracked = createHook$1(
   "rtc"
 );
 function onErrorCaptured(hook, target = currentInstance) {
@@ -5349,12 +5346,6 @@ const Comment = Symbol.for("v-cmt");
 const Static = Symbol.for("v-stc");
 function isVNode(value) {
   return value ? value.__v_isVNode === true : false;
-}
-const InternalObjectKey = `__vInternal`;
-function guardReactiveProps(props) {
-  if (!props)
-    return null;
-  return isProxy(props) || InternalObjectKey in props ? extend({}, props) : props;
 }
 const emptyAppContext = createAppContext();
 let uid = 0;
@@ -6540,11 +6531,6 @@ function initApp(app) {
   }
 }
 const propsCaches = /* @__PURE__ */ Object.create(null);
-function renderProps(props) {
-  const { uid: uid2, __counter } = getCurrentInstance();
-  const propsId = (propsCaches[uid2] || (propsCaches[uid2] = [])).push(guardReactiveProps(props)) - 1;
-  return uid2 + "," + propsId + "," + __counter;
-}
 function pruneComponentPropsCache(uid2) {
   delete propsCaches[uid2];
 }
@@ -6710,7 +6696,6 @@ const o = (value, key) => vOn(value, key);
 const f = (source, renderItem) => vFor(source, renderItem);
 const e = (target, ...sources) => extend(target, ...sources);
 const t = (val) => toDisplayString(val);
-const p = (props) => renderProps(props);
 function createApp$1(rootComponent, rootProps = null) {
   rootComponent && (rootComponent.mpType = "app");
   return createVueApp(rootComponent, rootProps).use(plugin);
@@ -8219,36 +8204,10 @@ Store.prototype._withCommit = function _withCommit(fn) {
   this._committing = committing;
 };
 Object.defineProperties(Store.prototype, prototypeAccessors);
-/*!
-  * vue-router v4.3.0
-  * (c) 2024 Eduardo San Martin Morote
-  * @license MIT
-  */
-var NavigationType;
-(function(NavigationType2) {
-  NavigationType2["pop"] = "pop";
-  NavigationType2["push"] = "push";
-})(NavigationType || (NavigationType = {}));
-var NavigationDirection;
-(function(NavigationDirection2) {
-  NavigationDirection2["back"] = "back";
-  NavigationDirection2["forward"] = "forward";
-  NavigationDirection2["unknown"] = "";
-})(NavigationDirection || (NavigationDirection = {}));
-var NavigationFailureType;
-(function(NavigationFailureType2) {
-  NavigationFailureType2[NavigationFailureType2["aborted"] = 4] = "aborted";
-  NavigationFailureType2[NavigationFailureType2["cancelled"] = 8] = "cancelled";
-  NavigationFailureType2[NavigationFailureType2["duplicated"] = 16] = "duplicated";
-})(NavigationFailureType || (NavigationFailureType = {}));
-const routerKey = Symbol("router");
-const routeLocationKey = Symbol("route location");
-function useRouter() {
-  return inject(routerKey);
-}
-function useRoute() {
-  return inject(routeLocationKey);
-}
+const createHook = (lifecycle) => (hook, target = getCurrentInstance()) => {
+  !isInSSRComponentSetup && injectHook(lifecycle, hook, target);
+};
+const onLoad = /* @__PURE__ */ createHook(ON_LOAD);
 exports._export_sfc = _export_sfc;
 exports.computed = computed;
 exports.createSSRApp = createSSRApp;
@@ -8257,11 +8216,8 @@ exports.e = e;
 exports.f = f;
 exports.index = index;
 exports.o = o;
+exports.onLoad = onLoad;
 exports.onMounted = onMounted;
-exports.p = p;
 exports.ref = ref;
 exports.t = t;
-exports.useRoute = useRoute;
-exports.useRouter = useRouter;
 exports.useStore = useStore;
-exports.watch = watch;

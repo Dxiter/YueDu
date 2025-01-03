@@ -3,7 +3,8 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
-    cartItems: []
+    cartItems: [],
+    isLogin: false
   },
   getters: {
     cartItems: state => state.cartItems,
@@ -27,6 +28,9 @@ export default createStore({
       if (item) {
         item.quantity = quantity;
       }
+    },
+    setLoginStatus(state, status) {
+      state.isLogin = status;
     }
   },
   actions: {
@@ -38,6 +42,9 @@ export default createStore({
     },
     updateCartItemQuantity({ commit }, payload) {
       commit('updateCartItemQuantity', payload);
+    },
+    login({ commit }, status) {
+      commit('setLoginStatus', status);
     }
   }
 });

@@ -4,10 +4,12 @@ const common_vendor = require("./common/vendor.js");
 const store_index = require("./store/index.js");
 if (!Math) {
   "./pages/index/index.js";
-  "./pages/category/category.js";
-  "./pages/cart/cart.js";
+  "./pages/bookshelf/bookshelf.js";
+  "./pages/voicebook/voicebook.js";
   "./pages/user/user.js";
-  "./pages/product/product.js";
+  "./pages/user/login.js";
+  "./pages/user/register.js";
+  "./pages/bookdetail/bookdetail.js";
 }
 const _sfc_main = {
   onLaunch: function() {

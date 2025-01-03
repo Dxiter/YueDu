@@ -28,7 +28,6 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  /* wode.wxss */
 }
 .my-page .header.data-v-0f7520f0 {
   width: 100%;
@@ -37,24 +36,31 @@
   overflow: hidden;
 }
 .my-page .user-info.data-v-0f7520f0 {
-  height: 120rpx;
+  height: 300rpx;
   padding: 0 32rpx;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.my-page .user-info-left-box.data-v-0f7520f0 {
-  width: calc(100% - 156rpx);
-  height: 100%;
+.my-page .user-info-left-03box.data-v-0f7520f0 {
   display: flex;
   align-items: center;
 }
 .my-page .user-info-avatar.data-v-0f7520f0 {
-  margin-right: 32rpx;
-  width: 120rpx;
-  height: 120rpx;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+  width: 135rpx;
+  height: 135rpx;
   border-radius: 50%;
+}
+.my-page .user-name.data-v-0f7520f0 {
+  margin-top: 75rpx;
+  margin-left: 30rpx;
+  color: white;
+  white-space: nowrap;
+  font-size: 36rpx;
+  line-height: 50rpx;
 }
 .my-page .login-container.data-v-0f7520f0 {
   width: calc(100% - 120rpx - 32rpx);
@@ -66,47 +72,12 @@
   color: white;
   line-height: 120rpx;
 }
-.my-page .id-num-box.data-v-0f7520f0 {
-  width: calc(100% - 120rpx - 32rpx);
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-}
-.my-page .id-num-box .user-name.data-v-0f7520f0 {
-  color: white;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 36rpx;
-  line-height: 50rpx;
-}
-.my-page .id-num-box .user-ids.data-v-0f7520f0 {
-  display: flex;
-  align-items: center;
-}
-.my-page .id-num-box .user-ids .user-id.data-v-0f7520f0 {
-  color: white;
-  line-height: 40rpx;
-  font-size: 28rpx;
-  padding-right: 8rpx;
-}
-.my-page .id-num-box .user-ids .user-tags.data-v-0f7520f0 {
-  border: 2rpx solid #ffffff;
-  border-radius: 8rpx;
-  color: white;
-  font-size: 20rpx;
-  line-height: 22rpx;
-  text-align: center;
-  padding: 4rpx 8rpx;
-  box-sizing: border-box;
-}
 .my-page .user-info-right-box.data-v-0f7520f0 {
+  margin-top: 70rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 180rpx;
+  width: 100rpx;
   background-color: goldenrod;
   border-radius: 30rpx;
 }
@@ -114,7 +85,7 @@
   color: black;
   font-size: 28rpx;
 }
-.my-page .order-container.data-v-0f7520f0 {
+.my-page .account-data.data-v-0f7520f0 {
   width: 100%;
   box-sizing: border-box;
 }
@@ -173,54 +144,39 @@
   height: calc(100vh - 494rpx);
 }
 .my-page .drag-content .scroll-container .scroll-container-content.data-v-0f7520f0 {
-  padding-top: 64rpx;
+  padding-top: 10rpx;
   padding-bottom: 64rpx;
 }
-.my-page .drag-content.data-v-0f7520f0 {
-  background: #ffffff;
-  transition: all 0.3s linear;
-}
-.my-page .drag-content .scroll-container.data-v-0f7520f0 {
-  height: calc(100vh - 494rpx);
-}
-.my-page .drag-content .scroll-container .scroll-container-content.data-v-0f7520f0 {
-  padding-top: 64rpx;
-  padding-bottom: 64rpx;
-}
-.my-page .drag-content .my-functions.data-v-0f7520f0 {
+.my-page .my-functions.data-v-0f7520f0 {
   width: 100%;
   background: #ffffff;
-  padding: 0rpx 32rpx;
+  padding: 0rpx 30rpx;
   box-sizing: border-box;
 }
-.my-page .drag-content .my-functions .icon.data-v-0f7520f0 {
-  width: 48rpx;
-  height: 48rpx;
-}
-.my-page .drag-content .my-functions view.data-v-0f7520f0 {
+.my-page .my-functions view.data-v-0f7520f0 {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #EEF2F4;
   padding: 32rpx 0rpx 32rpx 0rpx;
 }
-.my-page .drag-content .my-functions view image.data-v-0f7520f0 {
+.my-page .my-functions view image.data-v-0f7520f0 {
   width: 48rpx;
 }
-.my-page .drag-content .my-functions view text.data-v-0f7520f0 {
+.my-page .my-functions view text.data-v-0f7520f0 {
   color: #333333;
   margin-left: 36rpx;
   font-size: 28rpx;
 }
-.my-page .drag-content .my-functions view.data-v-0f7520f0:last-child {
+.my-page .my-functions view.data-v-0f7520f0:last-child {
   border-bottom: 0px solid #EEF2F4;
 }
-.my-page .drag-content .exit-container.data-v-0f7520f0 {
+.my-page .exit-container.data-v-0f7520f0 {
   padding: 0rpx 32rpx;
   box-sizing: border-box;
   width: 100%;
   padding-top: 12%;
 }
-.my-page .drag-content .exit-container .exit-btn.data-v-0f7520f0 {
+.my-page .exit-container .exit-btn.data-v-0f7520f0 {
   width: 100%;
   height: 96rpx;
   border-radius: 4px;

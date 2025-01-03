@@ -2,7 +2,8 @@
 const common_vendor = require("../common/vendor.js");
 const store = common_vendor.createStore({
   state: {
-    cartItems: []
+    cartItems: [],
+    isLogin: false
   },
   getters: {
     cartItems: (state) => state.cartItems,
@@ -26,6 +27,9 @@ const store = common_vendor.createStore({
       if (item) {
         item.quantity = quantity;
       }
+    },
+    setLoginStatus(state, status) {
+      state.isLogin = status;
     }
   },
   actions: {
@@ -37,6 +41,9 @@ const store = common_vendor.createStore({
     },
     updateCartItemQuantity({ commit }, payload) {
       commit("updateCartItemQuantity", payload);
+    },
+    login({ commit }, status) {
+      commit("setLoginStatus", status);
     }
   }
 });

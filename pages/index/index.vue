@@ -1,8 +1,8 @@
-<!-- pages/index/index.vue -->
 <template>
   <view class="home">
     <!-- 轮播图 -->
-    <swiper class="swiper" :indicator-dots="true" autoplay circular indicator-color="#ccc" indicator-active-color="#ff0000">
+    <swiper class="swiper" :indicator-dots="true" autoplay circular indicator-color="#ccc"
+      indicator-active-color="#ff0000">
       <swiper-item v-for="(banner, index) in banners" :key="index">
         <image :src="banner.image" class="slide-image"></image>
       </swiper-item>
@@ -10,52 +10,52 @@
 
     <!-- 分类导航 -->
     <scroll-view scroll-x class="category-nav">
-      <view 
-        v-for="(category, index) in categories" 
-        :key="index" 
-        class="category-item"
-        @click="navigateToCategory(category.id)"
-      >
+      <view v-for="(category, index) in categories" :key="index" class="category-item"
+        @click="navigateToCategory(category.id)">
         <image :src="category.icon" class="category-icon"></image>
         <text class="category-name">{{ category.name }}</text>
       </view>
     </scroll-view>
 
-    <!-- 推荐商品 -->
-    <view class="section-title">为你推荐</view>
-    <view class="product-grid">
-      <navigator v-for="(product, index) in recommendedProducts" :key="index" :url="'/pages/product/product?id=' + product.id" class="product-item">
-        <image :src="product.image" class="product-image"></image>
-        <view class="product-details">
-          <text class="product-name">{{ product.name }}</text>
-          <text class="product-price">￥{{ product.price }}</text>
+    <h3>为你推荐</h3>
+    <view class="book-grid">
+      <navigator v-for="(book, index) in recommendedBooks" :key="index"
+        :url="'/pages/bookdetail/bookdetail?id=' + book.id" class="book-item">
+        <view class="book-cover-container">
+          <image :src="book.cover" class="book-cover"></image>
+        </view>
+        <view class="book-details">
+          <text class="book-author">{{ book.author }}</text>
         </view>
       </navigator>
     </view>
 
-    <!-- 新品上架 -->
-    <view class="section-title">新品上架</view>
-    <view class="product-grid">
-      <navigator v-for="(product, index) in newProducts" :key="index" :url="'/pages/product/product?id=' + product.id" class="product-item">
-        <image :src="product.image" class="product-image"></image>
-        <view class="product-details">
-          <text class="product-name">{{ product.name }}</text>
-          <text class="product-price">￥{{ product.price }}</text>
-        </view>
-      </navigator>
+    <view class="hot-search">
+      <h3>热搜榜</h3>
+      <view class="grid">
+        <navigator v-for="item in hotSearch" :key="item.id" :url="'/pages/bookdetail/bookdetail?id=' + item.id"
+          class="card">
+          <image :src="item.image" :alt="item.title" class="card-image" />
+          <p>{{ item.title }}</p>
+          <span>{{ item.detail }}</span>
+        </navigator>
+      </view>
+      <button @click="viewMoreHotSearch">查看热搜榜</button>
     </view>
 
-    <!-- 促销活动 -->
-    <view class="section-title">促销活动</view>
-    <view class="promotion-grid">
-      <navigator v-for="(promotion, index) in promotions" :key="index" :url="promotion.url" class="promotion-item">
-        <image :src="promotion.image" class="promotion-image"></image>
-        <view class="promotion-details">
-          <text class="promotion-title">{{ promotion.title }}</text>
-          <text class="promotion-description">{{ promotion.description }}</text>
-        </view>
-      </navigator>
+    <view class="rising-list">
+      <h3>飙升榜</h3>
+      <view class="grid">
+        <navigator v-for="item in risingList" :key="item.id" :url="'/pages/bookdetail/bookdetail?id=' + item.id"
+          class="card">
+          <image :src="item.image" :alt="item.title" class="card-image" />
+          <p>{{ item.title }}</p>
+          <span>{{ item.detail }}</span>
+        </navigator>
+      </view>
+      <button @click="viewMoreRisingList">查看飙升榜</button>
     </view>
+
   </view>
 </template>
 
@@ -63,45 +63,70 @@
 import { ref } from 'vue';
 
 const banners = ref([
-  { image: 'https://gw.alicdn.com/imgextra/i4/O1CN01XW9vah1rhFN3Vrr4v_!!6000000005662-0-tps-740-402.jpg_Q75.jpg' },
-  { image: 'https://p2.lefile.cn/fes/cms/2024/12/09/fijoy9t4vqjipv5m3s5ruebve6t4ub741700.jpg' },
-  { image: 'https://www.sonystyle.com.cn/content/dam/sonystyle/products/headphone/index_img/kv/wh_1000xn5_r_1920x600.jpg' }
+  { image: 'https://bossaudioandcomic-1252317822.image.myqcloud.com/activity/document/2a921eefb0ad96193657168c5f7eb6a7.jpg' },
+  { image: 'https://bossaudioandcomic-1252317822.image.myqcloud.com/activity/document/a57f73a65bbddb51e6f3512cbb2aa1b0.jpg' },
+  { image: 'https://bossaudioandcomic-1252317822.image.myqcloud.com/activity/document/119db9a8899a5a106b750229c0db0408.jpg' }
 ]);
 
 const categories = ref([
-        { id: 1, name: '电子', icon: 'https://img13.360buyimg.com/jdcms/s480x480_jfs/t1/235019/35/26475/60904/66d0147eFcc2a1760/52199b4fd6e33f53.jpg.avif' },
-        { id: 2, name: '家居', icon: 'https://img10.360buyimg.com/n7/jfs/t1/243814/5/18827/62167/66e2580fF57dce2ab/e93adc7fe25f50a3.jpg.avif' },
-        { id: 3, name: '服装', icon: 'https://img13.360buyimg.com/n1/s350x467_jfs/t1/232324/10/25427/78081/66cc0574Fda15e5da/f103f53e54629a79.jpg!cc_350x467.avif' },
-        { id: 4, name: '食品', icon: 'https://img11.360buyimg.com/n1/jfs/t1/139911/26/38408/277588/64c504bfFc6838326/0247bbcd732da6d6.jpg.avif' }
-      ]);
-
-const recommendedProducts = ref([
-{ id: 1, name: '智能手表', image: 'https://img1.360buyimg.com/n6/jfs/t1/186195/24/53696/30183/6752b70dFad2ea20f/6715c5e96e5dbce0.jpg', price: 999, categoryId: 1, state: '已售2.5k', marks: '好评95%' },
-{ id: 2, name: '无线耳机', image: 'https://img1.360buyimg.com/n6/jfs/t1/173412/3/52978/42054/6751532cFcbd79444/6f8347598551d622.jpg', price: 499, categoryId: 1, state: '已售1.8k', marks: '好评90%' },
-{ id: 3, name: '蓝牙音箱', image: 'https://img1.360buyimg.com/n6/jfs/t1/248167/8/26400/152717/67568723F9935c31a/4ee76cd2ff73ded9.jpg', price: 299, categoryId: 1, state: '已售1.2k', marks: '好评85%' },
+  { id: 1, name: '玄幻', icon: '../../static/icon_pic/long.png' },
+  { id: 2, name: '都市', icon: '../../static/icon_pic/dushi.png' },
+  { id: 3, name: '战争', icon: '../../static/icon_pic/dapao.png' },
+  { id: 4, name: '悬疑', icon: '../../static/icon_pic/kongbu.png' }
 ]);
 
-const newProducts = ref([
-{ id: 4, name: '新款手机', image: 'https://img1.360buyimg.com/n6/jfs/t1/212189/30/49772/97603/674d5e40F53f8d1f2/33ff4086f586a6c6.jpg', price: 2999, categoryId: 1, state: '已售3.5k', marks: '好评98%' },
-{ id: 5, name: '智能手环', image: 'https://img1.360buyimg.com/n6/jfs/t1/176959/10/52427/48787/6752b726Fc3e5af01/ea48d02c6c1dd88f.jpg', price: 199, categoryId: 1, state: '已售1.5k', marks: '好评92%' },
-{ id: 6, name: '游戏机', image: 'https://img1.360buyimg.com/n6/jfs/t1/132926/17/50106/76251/673d4370F6dca49cd/3031243f8ebb3400.jpg', price: 2499, categoryId: 1, state: '已售2.0k', marks: '好评88%' },
+const hotSearch = ref([
+  { id: 1, image: "https://bookcover.yuewen.com/qdbimg/349573/1042444808/600.webp", title: "2024 热搜趋势", detail: "在这些书里看见世界" },
+  { id: 2, image: "https://bookcover.yuewen.com/qdbimg/349573/1042246156/600.webp", title: "清明上河图密码", detail: "连续在榜8天" },
+  { id: 3, image: "https://bookcover.yuewen.com/qdbimg/349573/1042443001/600.webp", title: "第一性原理", detail: "6444 人在搜" }
 ]);
 
-const promotions = ref([
-  { title: '双11大促', description: '全场五折', image: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.guFFW0TN39dlVcBs3yHmNgAAAA?rs=1&pid=ImgDetMain', url: '/pages/promotion/promotion?id=1' },
-  { title: '感恩节特惠', description: '买一赠一', image: 'https://tse2-mm.cn.bing.net/th/id/OIP-C.0Dc0mwylg4mVbJj6VxpzwgAAAA?rs=1&pid=ImgDetMain', url: '/pages/promotion/promotion?id=2' }
+const risingList = ref([
+  { id: 1, image: "https://bookcover.yuewen.com/qdbimg/349573/1042444808/600.webp", title: "我们为什么而活", detail: "本周超5千人在读" },
+  { id: 2, image: "https://bookcover.yuewen.com/qdbimg/349573/1042246156/600.webp", title: "越过山丘", detail: "累计在榜12天" },
+  { id: 3, image: "https://bookcover.yuewen.com/qdbimg/349573/1042443001/600.webp", title: "职场十年", detail: "打工人的蜕变之旅" },
 ]);
 
-const navigateToCategory = (categoryId) => {
-  uni.switchTab({
-    url: `/pages/category/category?id=${categoryId}`
-  });
+const recommendedBooks = ref([
+  {
+    id: 1,
+    title: '坐看仙倾',
+    author: '错哪儿了',
+    cover: 'https://bookcover.yuewen.com/qdbimg/349573/1042444808/600.webp'
+  },
+  {
+    id: 2,
+    title: '传说时代',
+    author: '奥尔良烤鲟鱼堡',
+    cover: 'https://bookcover.yuewen.com/qdbimg/349573/1042246156/600.webp'
+  },
+  {
+    id: 3,
+    title: '世界版本更新',
+    author: '不落鱼',
+    cover: 'https://bookcover.yuewen.com/qdbimg/349573/1042443001/600.webp'
+  },
+  {
+    id: 4,
+    title: '剑出仙山',
+    author: '南朝陈',
+    cover: 'https://bookcover.yuewen.com/qdbimg/349573/1042433761/600.webp'
+  }
+]);
+
+const viewMoreHotSearch = () => {
+  alert("查看热搜榜功能开发中...");
+};
+
+const viewMoreRisingList = () => {
+  alert("查看飙升榜功能开发中...");
 };
 </script>
 
 <style scoped>
 .home {
   padding: 20rpx;
+  background-color: #f9f9f9;
 }
 
 /* 轮播图 */
@@ -110,18 +135,12 @@ const navigateToCategory = (categoryId) => {
   margin-bottom: 20rpx;
   position: relative;
 }
+
 .slide-image {
   width: 100%;
   height: 100%;
   border-radius: 10rpx;
-}
-.section-title {
-  /* 文字居中 */
-  text-align: center;
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 20rpx;
-  color: #333; /* 设置文字颜色 */
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 /* 分类导航 */
@@ -130,86 +149,136 @@ const navigateToCategory = (categoryId) => {
   overflow-x: auto;
   margin-left: 23rpx;
   margin-bottom: 10rpx;
-  display: flex; /* 使用 flex 布局 */
-  justify-content: center; /* 水平居中对齐 */
+  display: flex;
+  justify-content: center;
 }
+
 .category-item {
-  display: inline-flex; /* 使用 inline-flex 以便在同一行显示 */
-  flex-direction: column; /* 图片和文字垂直排列 */
-  align-items: center; /* 水平居中对齐 */
-  justify-content: center; /* 垂直居中对齐 */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 150rpx;
   margin-right: 20rpx;
 }
+
 .category-icon {
   width: 80rpx;
   height: 80rpx;
   border-radius: 10rpx;
-  margin-bottom: 10rpx; /* 图片和文字之间的间距 */
+  margin-bottom: 10rpx;
 }
+
 .category-name {
   font-size: 28rpx;
 }
 
-/* 商品网格 */
-.product-grid {
+/* 为你推荐 */
+.book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200rpx, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20rpx;
   margin-bottom: 20rpx;
 }
-.product-item {
-  background-color: #fff;
-  border-radius: 10rpx;
-  overflow: hidden;
-  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
-}
-.product-image {
-  width: 100%;
-  height: 200rpx;
-}
-.product-details {
-  padding: 20rpx;
+
+.book-item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-}
-.product-name {
-  font-size: 28rpx;
-  margin-bottom: 10rpx;
-}
-.product-price {
-  color: #ff0000;
-  font-size: 24rpx;
-}
-
-/* 促销活动 */
-.promotion-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300rpx, 1fr));
-  gap: 20rpx;
-}
-.promotion-item {
-  background-color: #fff;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
   border-radius: 10rpx;
   overflow: hidden;
-  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
-.promotion-image {
+
+.book-cover-container {
+  margin-left: 2rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260rpx;
+  height: 350rpx;
+  overflow: hidden;
+}
+
+.book-cover {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-author {
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.hot-search,
+.rising-list,
+.new-books {
+  margin-bottom: 20rpx;
+}
+
+.grid {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  flex: 1;
+  max-width: 300rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  max-width: 100%;
   width: 100%;
-  height: 200rpx;
-}
-.promotion-details {
-  padding: 20rpx;
-}
-.promotion-title {
-  font-size: 32rpx;
-  font-weight: bold;
+  /* 设置图片宽度 */
+  height: 180px;
+  border-radius: 5rpx;
   margin-bottom: 10rpx;
 }
-.promotion-description {
-  font-size: 24rpx;
-  color: #666;
+
+.card p {
+  font-size: 16px;
+  margin: 5rpx 0;
+}
+
+.card span {
+  display: block;
+  margin-top: 5rpx;
+  font-size: 14rpx;
+  color: #aaa;
+}
+
+button {
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5rpx;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>

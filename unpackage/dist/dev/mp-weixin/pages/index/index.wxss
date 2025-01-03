@@ -1,6 +1,7 @@
 
 .home.data-v-1cf27b2a {
   padding: 20rpx;
+  background-color: #f9f9f9;
 }
 
 /* 轮播图 */
@@ -12,86 +13,128 @@
 .slide-image.data-v-1cf27b2a {
   width: 100%;
   height: 100%;
-  border-radius: 10rpx; /* 圆角效果 */
-}
-.swiper .uni-swiper-dots.data-v-1cf27b2a {
-  bottom: 10rpx; /* 调整指示点位置 */
+  border-radius: 10rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 /* 分类导航 */
 .category-nav.data-v-1cf27b2a {
-  display: none; /* 隐藏原来的分类导航 */
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-left: 23rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  justify-content: center;
 }
-.categoryproduct-image.data-v-1cf27b2a{
-  width: 80rpx; /* 图片宽度占满项目宽度 */
+.category-item.data-v-1cf27b2a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  margin-right: 20rpx;
+}
+.category-icon.data-v-1cf27b2a {
+  width: 80rpx;
   height: 80rpx;
-  border-radius: 10rpx; /* 圆角效果 */
-  margin-bottom: 10rpx; /* 增加图片与文字之间的间距 */
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
 }
-.section-title.data-v-1cf27b2a {
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-bottom: 20rpx;
-  text-align: center; /* 确保标题居中 */
-}
-.product-list.data-v-1cf27b2a {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap; /* 允许换行 */
-  margin-bottom: 20rpx;
-}
-.product-item.data-v-1cf27b2a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 20%; /* 每个项目占总宽度的20% */
-  margin-bottom: 20rpx;
-  text-align: center;
-}
-.product-image.data-v-1cf27b2a {
-  width: 150rpx; /* 图片宽度占满项目宽度 */
-  height: 150rpx;
-  border-radius: 10rpx; /* 圆角效果 */
-  margin-bottom: 10rpx; /* 增加图片与文字之间的间距 */
-}
-.product-details.data-v-1cf27b2a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.product-name.data-v-1cf27b2a {
+.category-name.data-v-1cf27b2a {
   font-size: 28rpx;
-  margin-bottom: 5rpx; /* 增加名称与价格之间的间距 */
-}
-.product-price.data-v-1cf27b2a {
-  color: #ff0000;
-  font-size: 24rpx;
 }
 
-/* 促销活动 */
-.promotion-section.data-v-1cf27b2a {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; /* 允许换行 */
-}
-.promotion-item.data-v-1cf27b2a {
-  width: 48%; /* 调整宽度，允许两列显示 */
+/* 为你推荐 */
+.book-grid.data-v-1cf27b2a {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
   margin-bottom: 20rpx;
 }
-.promotion-image.data-v-1cf27b2a {
-  width: 100%;
-  height: 200rpx;
-  border-radius: 10rpx; /* 圆角效果 */
+.book-item.data-v-1cf27b2a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  border-radius: 10rpx;
+  overflow: hidden;
+  background-color: #fff;
 }
-.promotion-title.data-v-1cf27b2a {
-  font-size: 32rpx;
-  font-weight: bold;
+.book-cover-container.data-v-1cf27b2a {
+  margin-left: 2rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260rpx;
+  height: 350rpx;
+  overflow: hidden;
+}
+.book-cover.data-v-1cf27b2a {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.book-details.data-v-1cf27b2a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.book-author.data-v-1cf27b2a {
+  text-align: center;
   margin-top: 10rpx;
-  text-align: center;
 }
-.promotion-description.data-v-1cf27b2a {
-  font-size: 24rpx;
-  color: #666;
+.hot-search.data-v-1cf27b2a,
+.rising-list.data-v-1cf27b2a,
+.new-books.data-v-1cf27b2a {
+  margin-bottom: 20rpx;
+}
+.grid.data-v-1cf27b2a {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card.data-v-1cf27b2a {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
   text-align: center;
-  margin-top: 5rpx; /* 增加间距 */
+  flex: 1;
+  max-width: 300rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.card.data-v-1cf27b2a:hover {
+  transform: translateY(-5px);
+}
+.card-image.data-v-1cf27b2a {
+  max-width: 100%;
+  width: 100%;
+  /* 设置图片宽度 */
+  height: 180px;
+  border-radius: 5rpx;
+  margin-bottom: 10rpx;
+}
+.card p.data-v-1cf27b2a {
+  font-size: 16px;
+  margin: 5rpx 0;
+}
+.card span.data-v-1cf27b2a {
+  display: block;
+  margin-top: 5rpx;
+  font-size: 14rpx;
+  color: #aaa;
+}
+button.data-v-1cf27b2a {
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5rpx;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+button.data-v-1cf27b2a:hover {
+  background-color: #0056b3;
 }

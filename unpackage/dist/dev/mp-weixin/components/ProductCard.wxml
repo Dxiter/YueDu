@@ -1,1 +1,0 @@
-<view class="product-card data-v-fe52aa40" bindtap="{{d}}"><image src="{{a}}" class="product-image data-v-fe52aa40"></image><view class="product-info data-v-fe52aa40"><text class="product-name data-v-fe52aa40">{{b}}</text><text class="product-price data-v-fe52aa40">￥{{c}}</text></view></view>
